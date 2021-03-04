@@ -1,0 +1,23 @@
+{
+  "name": "icfesbackend",
+  "version": "1.0.0",
+  "description": "Apliacion con fines educativos, y mejora del rendimiento en las pruebas icfes",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MeloCristian/IcfesApp.git"
+  },
+  "author": "cristian melo alvarez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MeloCristian/IcfesApp/issues"
+  },
+  "homepage": "https://github.com/MeloCristian/IcfesApp#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
