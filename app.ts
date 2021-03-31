@@ -8,6 +8,7 @@ import  { api } from './src/routes'
 import  { sequelize } from './src/sequelize'
 import  cookieParser from 'cookie-parser'
 
+
 const app = express()
 
 app.use(bodyParser.json())
