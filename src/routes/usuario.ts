@@ -7,12 +7,10 @@ UsuarioRouter.post('/add',async (req,res)=>{
     const user = req.body
     try{
         let result = await UsuarioController.addUser(user)
-        res.status(200).json({
-            data: result,
-            ok: true
-        })
+        res.status(200).json(result)
     }catch(err){
-        res.status(400).json(err);
+        console.log(err);
+        res.status(500).json(err);
     }
 })
 

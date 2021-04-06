@@ -6,8 +6,7 @@ export const sequelize = new Sequelize({
     username: process.env.DBUSER,
     password: process.env.DBPASSWORD,
     database: process.env.DATABASE,
-    host: 'postgresql-25946-0.cloudclusters.net',
-    port: 25984,
+    port: 5432,
     logging: false,
     define: {
         timestamps: false,

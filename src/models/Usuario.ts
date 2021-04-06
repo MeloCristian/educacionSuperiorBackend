@@ -1,4 +1,4 @@
-import {AutoIncrement, BelongsTo, Column, DataType, ForeignKey, HasMany, Model, PrimaryKey, Table } from 'sequelize-typescript'
+import {AutoIncrement, BelongsTo, Column, DataType, ForeignKey, HasMany, Model, PrimaryKey, Table, Unique } from 'sequelize-typescript'
 import { Rol } from './Rol'
 import { Usuario_pregunta } from './Usuario_pregunta'
 
@@ -16,6 +16,7 @@ export class Usuario extends Model<Usuario>{
     @Column(DataType.INTEGER)
     id_rol!: number
 
+    @Unique
     @Column(DataType.STRING(30))
     email_us!: string
 
