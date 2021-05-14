@@ -57,6 +57,7 @@ export const AuthController = {
       }
       let token = authorization.split(" ")[1];
       
+      
       jwt.verify(token, process.env.SEED_USER!, (error: any, decoded: any) => {
         if (error) {
           res.status(500).json({
