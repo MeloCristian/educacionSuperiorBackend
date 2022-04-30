@@ -1,7 +1,7 @@
-import { Column, HasMany, Model, PrimaryKey, Table,BelongsTo, ForeignKey, DataType, AutoIncrement, HasOne } from 'sequelize-typescript'
+import { Column, HasMany, Model, PrimaryKey, Table, BelongsTo, ForeignKey, DataType, AutoIncrement, HasOne } from 'sequelize-typescript'
 import { Area } from './Area'
-import {Respuesta} from './Respuesta'
-import { Usuario_pregunta } from './Usuario_pregunta'
+import { Respuesta } from './Respuesta'
+import { UsuarioPregunta } from './UsuarioPregunta'
 
 
 @Table
@@ -11,7 +11,7 @@ export class Pregunta extends Model<Pregunta>{
     @Column(DataType.INTEGER)
     id_pregunta!: number
 
-    @ForeignKey(()=> Area)
+    @ForeignKey(() => Area)
     @Column(DataType.INTEGER)
     id_area!: number
 
@@ -27,12 +27,12 @@ export class Pregunta extends Model<Pregunta>{
     @Column(DataType.STRING(60))
     img!: string
 
-    @BelongsTo(()=> Area)
+    @BelongsTo(() => Area)
     area?: Area
 
-    @HasMany(()=> Usuario_pregunta)
-    usuario_pregunta?: Usuario_pregunta
+    @HasMany(() => UsuarioPregunta)
+    usuarioPregunta?: UsuarioPregunta
 
-    @HasMany(()=> Respuesta)
+    @HasMany(() => Respuesta)
     respuestas?: Respuesta[]
 }

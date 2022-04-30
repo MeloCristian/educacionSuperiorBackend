@@ -8,12 +8,13 @@ const crypto = new Crypto();
 const AES_KEY = Buffer.from(process.env.AES_KEY!, "hex");
 
 export const AuthController = {
-  async sigin(data: any): Promise<any> {
+  async sigin(data: any): Promise<any> {  
     let usuario:any = await Usuario.findOne({
       where: {
         email_us: data.email_us,
       },
     });
+    
     usuario = usuario?.toJSON()
     let datos = `${usuario.id_usuario},${usuario.email_us}`
     
@@ -23,6 +24,8 @@ export const AuthController = {
         if (pasa) {
           let user = crypto.aesEncrypt(datos, AES_KEY);
           if (user === null) {
+            console.log("pasa");
+            
             return null;
           }
           const token = jwt.sign(
@@ -41,7 +44,7 @@ export const AuthController = {
           };
         }
       }
-    } catch (error) {
+    } catch (error) {  
       return null;
     }
   },

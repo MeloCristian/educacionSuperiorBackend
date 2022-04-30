@@ -7,6 +7,8 @@ AuthRouter.post('/sigin',async (req, res)=>{
     const {email_us,pass_us} =req.body;
     try {
         let resp = await AuthController.sigin({email_us,pass_us});
+        
+        
         if (resp!=null){
             res.status(200).json(
                 resp
@@ -14,7 +16,7 @@ AuthRouter.post('/sigin',async (req, res)=>{
         }else{
             res.status(500).send('Error')
         }
-    } catch (error) {
+    } catch (error) { 
         res.status(500).json(error)
     }
 })

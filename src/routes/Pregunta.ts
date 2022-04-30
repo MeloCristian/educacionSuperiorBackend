@@ -1,25 +1,25 @@
 import express from 'express'
 import { AuthController } from '../controllers/auth'
-import {PreguntaController} from '../controllers/Pregunta'
+import { PreguntaController } from '../controllers/Pregunta'
 
 
 export const PreguntaRouter = express.Router()
 
-PreguntaRouter.get('/random/:id',AuthController.verificarToken,async (req,res)=>{
+PreguntaRouter.post('/random/:id', async (req, res) => {
     let id_area = req.params.id
-    const {user} = req.body
+    const user = req.body
     try {
-        let pregunta = await PreguntaController.getRamdomPregunta(user,id_area);
-        if(pregunta!= null){
+        let pregunta = await PreguntaController.getRamdomPregunta(user, id_area);
+        if (pregunta != null) {
             res.status(200).json(pregunta)
-        }else{
+        } else {
             res.status(500).send('No se encontro preguntas');
         }
-        
-    } catch (error) { 
+
+    } catch (error) {
         console.log(error);
-        
+
         res.status(500).json(error)
     }
-   
+
 })

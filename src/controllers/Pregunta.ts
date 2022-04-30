@@ -1,10 +1,9 @@
-import {Pregunta} from '../models/Pregunta'
-import { Respuesta } from '../models/Respuesta'
-import {sequelize} from "../sequelize"
-import {UsuarioPreguntaController} from './Usuario_pregunta'
+import { Pregunta } from '../models/Pregunta'
+import { sequelize } from "../sequelize"
+import { UsuarioPreguntaController } from './UsuarioPregunta'
 
-export const PreguntaController= {
-    getPreguntabyPk(id_pregunta: string): Promise<Pregunta | null>{
+export const PreguntaController = {
+    getPreguntabyPk(id_pregunta: string): Promise<Pregunta | null> {
         return Pregunta.findByPk(id_pregunta)
     },
 
@@ -12,46 +11,50 @@ export const PreguntaController= {
         return Pregunta.create(pregunta);
     },
 
-    async getRamdomPregunta(user: any,id_area:any): Promise<Pregunta | any>{
-        let total_preguntas = await PreguntaController.countAll();
-        let total_respuestas = await UsuarioPreguntaController.countAllUsuarioPregunta(user.id_usuario)
+    async getRamdomPregunta(user: any, id_area: any): Promise<Pregunta | any> {
+        let totalPreguntasArea = await PreguntaController.countAllPreguntasArea(id_area);
+        let totalRespuestasArea = await UsuarioPreguntaController.countAllUsuarioPregunta(user.id_usuario, id_area)
 
-        if (total_preguntas===total_respuestas){
-            await UsuarioPreguntaController.deleteUsuarioPregunta(user.id_usuario)
+        if (totalPreguntasArea === totalRespuestasArea) {
+            await UsuarioPreguntaController.deleteUsuarioPreguntaArea(user.id_usuario, id_area)
         }
 
         return Pregunta.findOne({
             include: [
                 {
-                    model: sequelize.models.Respuesta
+                    model: sequelize.models.Respuesta,
                 }
             ],
-            order: sequelize.random(),
             where: {
                 id_area
             },
-        }).then(async res=>{
-            if (res!=null){
-                let contestada = await UsuarioPreguntaController.getByUsuarioPregunta(user.id_usuario,res.id_pregunta);
-                if (contestada!=null){                    
-                    let resultado = await this.getRamdomPregunta(user,id_area);
+            order: sequelize.random(),
+        }).then(async res => {
+            if (res != null) {
+                let contestada = await UsuarioPreguntaController.getByUsuarioPregunta(user.id_usuario, res.id_pregunta);
+                if (contestada != null) {
+                    let resultado = await this.getRamdomPregunta(user, id_area);
                     return resultado;
-                }else{
-                    UsuarioPreguntaController.addUsuarioPregunta({
+                } else {
+                    await UsuarioPreguntaController.addUsuarioPregunta({
                         id_usuario: user.id_usuario,
                         id_pregunta: res?.id_pregunta
                     })
                     return res
                 }
-            }else{
+            } else {
                 return res
             }
-        }).catch(err=>{
+        }).catch(err => {
             return err
         })
     },
 
-    countAll(): Promise<number>{
-        return Pregunta.count();
+    countAllPreguntasArea(id_area: number): Promise<number> {
+        return Pregunta.count({
+            where: {
+                id_area
+            }
+        });
     }
 }

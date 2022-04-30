@@ -1,4 +1,4 @@
-import { Column, HasMany, Model, PrimaryKey,Table, BelongsTo, ForeignKey, DataType, AutoIncrement } from 'sequelize-typescript'
+import { Column, HasMany, Model, PrimaryKey, Table, BelongsTo, ForeignKey, DataType, AutoIncrement } from 'sequelize-typescript'
 import { Pregunta } from './Pregunta'
 
 @Table({
@@ -10,9 +10,12 @@ export class Area extends Model<Area>{
     @Column(DataType.INTEGER)
     id_area!: number
 
+    @Column(DataType.STRING)
+    nombre!: string
+
     @Column(DataType.STRING(300))
     descripcion!: string
 
-    @HasMany(()=> Pregunta)
+    @HasMany(() => Pregunta)
     pregunta?: Pregunta
 }

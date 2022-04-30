@@ -1,32 +1,29 @@
 import { AutoIncrement, BelongsTo, Column, DataType, ForeignKey, HasMany, HasOne, Model, PrimaryKey, Table } from 'sequelize-typescript'
-import {Usuario} from './Usuario'
-import {Pregunta} from './Pregunta'
+import { Usuario } from './Usuario'
+import { Pregunta } from './Pregunta'
 
 @Table({
-    initialAutoIncrement: '1000'
+    initialAutoIncrement: '1000',
+    tableName: 'usuario_pregunta'
 })
-export class Usuario_pregunta extends Model<Usuario_pregunta>{
+export class UsuarioPregunta extends Model<UsuarioPregunta>{
     @PrimaryKey
     @AutoIncrement
     @Column(DataType.INTEGER)
     id_usuario_pregunta!: number
-    
-    @ForeignKey(()=> Usuario)
+
+    @ForeignKey(() => Usuario)
     @Column(DataType.INTEGER)
     id_usuario!: number
 
-    @ForeignKey(()=> Pregunta)
+    @ForeignKey(() => Pregunta)
     @Column(DataType.INTEGER)
     id_pregunta!: number
 
-    @Column(DataType.INTEGER)
-    veces_cantestada!: Number
-
-    
-    @BelongsTo(()=> Usuario)
+    @BelongsTo(() => Usuario)
     usuario?: Usuario
 
-    @BelongsTo(()=> Pregunta)
+    @BelongsTo(() => Pregunta)
     pregunta?: Pregunta
 
 }
