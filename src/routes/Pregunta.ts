@@ -9,7 +9,7 @@ PreguntaRouter.post('/random/:id', async (req, res) => {
     let id_area = req.params.id
     const user = req.body
     try {
-        let pregunta = await PreguntaController.getRamdomPregunta(user, id_area);
+        let pregunta = await PreguntaController.getRandomPregunta(user, id_area);
         if (pregunta != null) {
             res.status(200).json(pregunta)
         } else {
