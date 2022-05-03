@@ -16,6 +16,9 @@ export class Area extends Model<Area>{
     @Column(DataType.STRING(300))
     descripcion!: string
 
+    @Column(DataType.STRING(100))
+    img!: string
+
     @HasMany(() => Pregunta)
     pregunta?: Pregunta
 }

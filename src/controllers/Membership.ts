@@ -4,8 +4,8 @@ import { Persona } from '../models/Persona'
 
 export const MembershipController = {
 
-    getBypk(id_persona: string): Promise<Persona | null> {
-        return Persona.findByPk(id_persona);
+    getBypk(id: number): Promise<Membership | null> {
+        return Membership.findByPk(id);
     },
 
     addMembership(transaction?: sequelize.Transaction): Promise<Membership> {
