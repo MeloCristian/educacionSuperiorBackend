@@ -24,7 +24,7 @@ export class Pregunta extends Model<Pregunta>{
     @Column(DataType.STRING(1000))
     descripcion!: string
 
-    @Column(DataType.STRING(60))
+    @Column(DataType.STRING(150))
     img!: string
 
     @BelongsTo(() => Area)
