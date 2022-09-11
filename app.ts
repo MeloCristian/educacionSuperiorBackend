@@ -19,7 +19,7 @@ app.use(cookieParser(crypto.randomBytes(16).toString('hex')))
 app.use('/api', api)
 app.use(express.static(path.resolve('public/')))
 const port = process.env.PORT || 4500
-sequelize.sync({ force: true }).then(() => {
-    //sequelize.sync().then(() => {
+//sequelize.sync({ force: true }).then(() => {
+sequelize.sync().then(() => {
     app.listen(port, () => console.log(`Server started on port ${port}`))
 })
