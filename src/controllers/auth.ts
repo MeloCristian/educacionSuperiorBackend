@@ -3,7 +3,6 @@ import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import { BlackListToken } from "../models/BlackListToken";
 import { Crypto } from "../lib/Crypto";
-import { createLogicalAnd } from "typescript";
 const crypto = new Crypto();
 const AES_KEY = Buffer.from(process.env.AES_KEY!, "hex");
 
@@ -15,8 +14,8 @@ export const AuthController = {
       },
     });
 
-    usuario = usuario?.toJSON()
-    let datos = `${usuario.id_usuario},${usuario.email_us}`
+    usuario = usuario?.toJSON();
+    let datos = `${usuario.id_usuario},${usuario.email_us}`;
 
     try {
       if (usuario) {
@@ -41,7 +40,7 @@ export const AuthController = {
           return {
             sigin: true,
             token,
-            id: usuario.id_usuario
+            id: usuario.id_usuario,
           };
         }
       }
@@ -56,34 +55,31 @@ export const AuthController = {
       console.log(authorization);
 
       if (!authorization) {
-        res.status(500).send('Error de utenticacion');
+        res.status(500).send("Error de utenticacion");
         return;
       }
       let token = authorization.split(" ")[1];
-
 
       jwt.verify(token, process.env.SEED_USER!, (error: any, decoded: any) => {
         if (error) {
           res.status(500).json({
             caducada: true,
           });
-          return
+          return;
         }
 
-        let user = decoded.user
-        user = crypto.aesDecrypt(user, AES_KEY, 'utf8')
+        let user = decoded.user;
+        user = crypto.aesDecrypt(user, AES_KEY, "utf8");
         user = {
-          id_usuario: user.split(',')[0],
-          email_us: user.split(',')[1]
-        }
-        req.body.user = user
+          id_usuario: user.split(",")[0],
+          email_us: user.split(",")[1],
+        };
+        req.body.user = user;
         next();
       });
     } catch (error) {
       console.log(error);
-
     }
-
   },
 
   verificaSesion(req: any, res: any) {
@@ -93,7 +89,6 @@ export const AuthController = {
       return;
     }
     let token = authorization.split(" ")[1];
-
 
     jwt.verify(token, process.env.SEED_USER!, (error: any, decoded: any) => {
       if (error) {
@@ -114,7 +109,7 @@ export const AuthController = {
       res.status(200).json({
         sigin: true,
         token,
-      })
+      });
     });
   },
 
