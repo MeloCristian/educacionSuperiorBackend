@@ -1,4 +1,4 @@
-import { AutoIncrement, Column, DataType, HasMany, PrimaryKey,Model, Table } from "sequelize-typescript";
+import { AutoIncrement, Column, DataType, HasMany, PrimaryKey, Model, Table } from "sequelize-typescript";
 import { Usuario } from "./Usuario";
 
 @Table({
@@ -16,7 +16,6 @@ export class Rol extends Model<Rol>{
     @Column(DataType.STRING(300))
     descripcion!: string
 
-    @HasMany(()=> Usuario)
+    @HasMany(() => Usuario)
     usuario?: Usuario
-
 }

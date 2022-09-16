@@ -4,7 +4,7 @@ import { AreaController } from '../controllers/Area'
 
 export const AreaRouter = express.Router()
 
-AreaRouter.get('/getAll', async (req, res) => {
+AreaRouter.get('', async (req, res) => {
     try {
         let area = await AreaController.getAll();
         if (area != null) {
