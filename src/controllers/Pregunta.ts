@@ -1,7 +1,4 @@
 import { Pregunta } from '../models/Pregunta'
-import { sequelize } from "../sequelize"
-import { UsuarioPreguntaController } from './UsuarioPregunta'
-
 export const PreguntaController = {
     getPreguntabyPk(id_pregunta: string): Promise<Pregunta | null> {
         return Pregunta.findByPk(id_pregunta)
@@ -22,7 +19,7 @@ export const PreguntaController = {
         return Pregunta.findOne({
             include: [
                 {
-                    model: sequelize.models.Respuesta,
+                    model: Pregunta,
                 }
             ],
             where: {

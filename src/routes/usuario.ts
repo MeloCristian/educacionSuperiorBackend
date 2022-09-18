@@ -3,7 +3,7 @@ import express from 'express'
 import { Usuario } from '../models/Usuario'
 import { Persona } from '../models/Persona'
 
-export const UsuarioRouter = express.Router()
+export const UsuarioRouter = express.Router();
 
 UsuarioRouter.post('/add', (req, res) => {
     const user = {
